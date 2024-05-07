@@ -1,0 +1,92 @@
+[
+    {
+        "label": "streamlit",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "streamlit",
+        "description": "streamlit",
+        "detail": "streamlit",
+        "documentation": {}
+    },
+    {
+        "label": "pandas",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "extract_integer",
+        "kind": 2,
+        "importPath": "bom_normalizer",
+        "description": "bom_normalizer",
+        "peekOfCode": "def extract_integer(s):\n    # Extracting integers from the string\n    match = re.search(r'\\d+', s)\n    return int(match.group()) if match else None\ndef convert_bom(df, level, partno):\n# Stack to keep track of parents\n    parent_stack = []\n    # Function to assign parents\n    def assign_parent(row):\n        # global parent_stack",
+        "detail": "bom_normalizer",
+        "documentation": {}
+    },
+    {
+        "label": "convert_bom",
+        "kind": 2,
+        "importPath": "bom_normalizer",
+        "description": "bom_normalizer",
+        "peekOfCode": "def convert_bom(df, level, partno):\n# Stack to keep track of parents\n    parent_stack = []\n    # Function to assign parents\n    def assign_parent(row):\n        # global parent_stack\n        while len(parent_stack) <= row[level]:\n            parent_stack.append(None)\n        if row[level] > 0:\n            row['Parent'] = parent_stack[row[level]-1]",
+        "detail": "bom_normalizer",
+        "documentation": {}
+    },
+    {
+        "label": "part_v_component",
+        "kind": 2,
+        "importPath": "bom_normalizer",
+        "description": "bom_normalizer",
+        "peekOfCode": "def part_v_component(parent):\n    if parent == \"\":\n        return 'Product'\n    else: return 'Component'\ndef load_sheet(file):\n    xls = pd.ExcelFile(file)\n    sheet_names = xls.sheet_names\n    return sheet_names\ndef convert_df(df):\n   return df.to_csv(index=False).encode('utf-8-sig')",
+        "detail": "bom_normalizer",
+        "documentation": {}
+    },
+    {
+        "label": "load_sheet",
+        "kind": 2,
+        "importPath": "bom_normalizer",
+        "description": "bom_normalizer",
+        "peekOfCode": "def load_sheet(file):\n    xls = pd.ExcelFile(file)\n    sheet_names = xls.sheet_names\n    return sheet_names\ndef convert_df(df):\n   return df.to_csv(index=False).encode('utf-8-sig')\nif uploaded_file:\n    try:\n        if uploaded_file.name.endswith('.csv'):\n            user_BOM = pd.read_csv(uploaded_file, error_bad_lines=False, encoding=\"utf-8-sig\", skiprows=skip_rows)",
+        "detail": "bom_normalizer",
+        "documentation": {}
+    },
+    {
+        "label": "convert_df",
+        "kind": 2,
+        "importPath": "bom_normalizer",
+        "description": "bom_normalizer",
+        "peekOfCode": "def convert_df(df):\n   return df.to_csv(index=False).encode('utf-8-sig')\nif uploaded_file:\n    try:\n        if uploaded_file.name.endswith('.csv'):\n            user_BOM = pd.read_csv(uploaded_file, error_bad_lines=False, encoding=\"utf-8-sig\", skiprows=skip_rows)\n        else:\n            sheet_names = load_sheet(uploaded_file)\n            sheet = st.selectbox('Choose a sheet', sheet_names)\n            if sheet:",
+        "detail": "bom_normalizer",
+        "documentation": {}
+    },
+    {
+        "label": "skip_rows",
+        "kind": 5,
+        "importPath": "bom_normalizer",
+        "description": "bom_normalizer",
+        "peekOfCode": "skip_rows = st.number_input(\"How many rows to skip when uploading BOM?\", min_value=0, max_value=100, value=0)\nuploaded_file = st.file_uploader(\"Upload a .csv or .xlsx file\", type=[\"csv\", \"xlsx\", \"xls\"])\n# df = pd.DataFrame(uploaded_file)\ndef part_v_component(parent):\n    if parent == \"\":\n        return 'Product'\n    else: return 'Component'\ndef load_sheet(file):\n    xls = pd.ExcelFile(file)\n    sheet_names = xls.sheet_names",
+        "detail": "bom_normalizer",
+        "documentation": {}
+    },
+    {
+        "label": "uploaded_file",
+        "kind": 5,
+        "importPath": "bom_normalizer",
+        "description": "bom_normalizer",
+        "peekOfCode": "uploaded_file = st.file_uploader(\"Upload a .csv or .xlsx file\", type=[\"csv\", \"xlsx\", \"xls\"])\n# df = pd.DataFrame(uploaded_file)\ndef part_v_component(parent):\n    if parent == \"\":\n        return 'Product'\n    else: return 'Component'\ndef load_sheet(file):\n    xls = pd.ExcelFile(file)\n    sheet_names = xls.sheet_names\n    return sheet_names",
+        "detail": "bom_normalizer",
+        "documentation": {}
+    }
+]
